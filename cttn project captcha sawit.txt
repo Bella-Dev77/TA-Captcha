@@ -1,0 +1,31 @@
+regist.js
+-pesan error - popup alert "Terlalu Cepat!" di line 92-93. (dapat di ubah title dan text)
+-pesan success - popup alert "Puzzle Solved!" di line 103-104. (dapat di ubah title dan text)
+-pesan error- popup alert "Invalid Drop Location!" di line 130-131. (dapat di ubah title dan text)
+-pesan error- popup alert "Oops!" di line 180-181. (dapat di ubah title dan text)
+-pesan success- popup alert "Registration Successful!" di line 202-203. (dapat di ubah title dan text)
+
+
+Login.js
+-pesan error- popup alert "Captcha tidak Valid!" di line 64-65 (dapat di ubah title dan text)
+-pesan success- popup alert "captcha valid" di line 73-74. (dapat di ubah title dan text)
+line 103-104
+line 116-117
+
+home.js
+-line 42
+-line 49
+-line 68
+-line 78
+untuk data warna dan huruf ada didalam array colors dan letter di line 6-7, yang aman di ubah letter.
+contoh :
+
+  var letters = ["A", "B", "C", "D"];
+di ubah jadi 
+  var letters = ["Z", "X", "P", "G"];
+warna jangan di ubah
+
+
+catatan : 
+di setiap fungsi sudah dibuatkan komentar yang menerangkan kegunaan dari fungsi tersebut.
+GoodLuck!

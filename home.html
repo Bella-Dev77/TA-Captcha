@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Palm Oil Homepage</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <!-- Include SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10" />
+
+    <!-- font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet" />
+
+    <style>
+      * {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+      }
+      section {
+        padding: 20px;
+        text-align: center;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      input[type="submit"] {
+        background-color: #3b5998;
+        color: #ffffff;
+        border: none;
+        padding: 15px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      input[type="submit"]:hover {
+        background-color: #2a3e6e;
+      }
+      footer {
+        background-color: #333333;
+        color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        bottom: 0;
+        width: 100%;
+      }
+
+      #captchaBox {
+        color: black;
+        width: 100px;
+        height: 100px;
+        font-size: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .formCaptch {
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        background-image: url("./src/img/sawit.png"); /* Ganti 'gambaranda.jpg' dengan URL atau path ke gambar latar belakang Anda */
+        background-size: 100% auto; /* Memperkecil gambar ke 50% lebar, tetapi tetap menutupi tinggi (proporsi asli gambar) */
+        background-position: center;
+        background-repeat: no-repeat; /* Jika Anda tidak ingin gambar diulang saat memperkecil */
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">MyPALM</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#statistics">Statistics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#news">Latest news</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sustainability"
+              >Sustainability Efforts</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#video">Video</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- wellcome  -->
+    <!-- Welcome Section -->
+    <section id="welcome" class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 class="my-5">Welcome to MyPALM</h1>
+            <p class="lead">
+              Your ultimate source for comprehensive information about palm oil.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              euismod lacus id felis consectetur, nec porta metus lacinia.
+            </p>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia
+              alias quo veritatis odit, quas, earum error est dicta dolor nisi
+              vitae fugiat ullam adipisci numquam harum quibusdam eos qui cum
+              minima. Exercitationem totam nobis architecto cum magnam quidem
+              quisquam ullam dicta assumenda temporibus. Nihil, vero.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <img src="./src/img/bg.png" class="img-fluid" alt="Welcome Image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-light py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="./src/img/palm.png" class="img-fluid" alt="About Image" />
+          </div>
+          <div class="col-md-6">
+            <h1 class="my-5">About MyPALM</h1>
+            <p class="lead">Learn more about our mission and vision.</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              euismod lacus id felis consectetur, nec porta metus lacinia.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- tentang palm oil  -->
+    <section id="information" class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="mb-4">About Palm Oil</h2>
+            <p>
+              Palm oil is an edible vegetable oil derived from the fruit of oil
+              palm trees. It is widely used in various industries, including
+              food, cosmetics, and biofuel production.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              euismod lacus id felis consectetur, nec porta metus lacinia. Nulla
+              facilisi. Sed et arcu ultrices, volutpat nunc ut, fringilla nunc.
+              Phasellus nec libero ac leo volutpat suscipit vel at justo.
+            </p>
+            <p>
+              Fusce eget malesuada lectus. Suspendisse nec arcu vel metus
+              posuere facilisis sit amet eget ipsum. Morbi ut nulla bibendum,
+              pharetra magna ut, malesuada leo. Donec ultrices metus ut dui
+              tincidunt malesuada.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistik -->
+
+    <section id="statistics" class="bg-light py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="mb-4">Palm Oil Statistics</h2>
+            <!-- Add your statistics data here -->
+            <p>
+              Global palm oil production has reached over X million metric tons
+              in the past year.
+            </p>
+            <p>
+              The top X palm oil producing countries are [List of countries].
+            </p>
+            <!-- You can add more statistics here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Berita terkini  -->
+    <section id="news" class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="mb-4">Latest News</h2>
+            <!-- Add your latest news articles here -->
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  New Study Reveals Impact of Palm Oil Industry on Environment
+                </h5>
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  euismod lacus id felis consectetur, nec porta metus lacinia.
+                </p>
+                <a href="#" class="btn btn-primary">Read More</a>
+              </div>
+            </div>
+            <!-- You can add more news articles here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sustainability Efforts -->
+    <section id="sustainability" class="py-5" style="background-color: #f5f5f5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="mb-4">Sustainability Efforts</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              euismod lacus id felis consectetur, nec porta metus lacinia. Nulla
+              facilisi. Sed et arcu ultrices, volutpat nunc ut, fringilla nunc.
+            </p>
+            <p>
+              Fusce eget malesuada lectus. Suspendisse nec arcu vel metus
+              posuere facilisis sit amet eget ipsum. Morbi ut nulla bibendum,
+              pharetra magna ut, malesuada leo. Donec ultrices metus ut dui
+              tincidunt malesuada.
+            </p>
+            <!-- Add more information about sustainability efforts here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video  -->
+    <section id="videos" class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="mb-4">Educational Videos</h2>
+            <!-- Add your educational videos here -->
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe
+                class="embed-responsive-item"
+                src="https://www.youtube.com/embed/your-video-id"
+                allowfullscreen></iframe>
+            </div>
+            <!-- You can add more videos here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5" style="background-color: #f5f5f5">
+      <div class="container">
+        <h2 class="text-center mb-4" style="color: #4a4a4a">Contact Us</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <form id="captchaForm" action="#" method="post" class="formCaptch">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                id="inputName"
+                required />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                id="inputEmail"
+                required />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                rows="4"
+                id="inputMessage"
+                required></textarea>
+              <div class="form-group d-flex flex-column align-items-center">
+                <label
+                  for="captchaColor"
+                  class="text-light"
+                  style="color: #4a4a4a"
+                  >CAPTCHA:</label
+                >
+                <div
+                  id="captchaBox"
+                  class="border border-dark rounded d-flex justify-content-center align-items-center"
+                  style="background-color: #dcdcdc; color: #4a4a4a">
+                  <span id="captchaText" class="d-none"></span>
+                </div>
+              </div>
+              <button
+                type="button"
+                id="refreshCaptcha"
+                class="btn btn-secondary">
+                Refresh
+              </button>
+              <div style="display: none">
+                <span id="captchaColor"></span>
+                <span id="captchaLetter"></span>
+              </div>
+              <div class="form-group">
+                <label
+                  for="captchaAnswer"
+                  class="text-light"
+                  style="color: #4a4a4a"
+                  >Answer:</label
+                >
+                <div id="captchaButtons"></div>
+              </div>
+              <input
+                type="submit"
+                class="btn btn-primary"
+                id="submitButton"
+                value="Send Message" />
+            </form>
+          </div>
+          <div class="col-md-6">
+            <p class="lead" style="color: #4a4a4a">
+              Have any questions or feedback? Feel free to reach out to us!
+            </p>
+            <p style="color: #4a4a4a">
+              We'd love to hear from you regarding any inquiries, suggestions,
+              or collaborations.
+            </p>
+            <p style="color: #4a4a4a">
+              Fill out the form on the left and we'll get back to you as soon as
+              possible.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 Palm Oil Website. All rights reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="./src/js/home.js"></script>
+  </body>
+</html>

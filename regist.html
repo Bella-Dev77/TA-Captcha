@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form with CAPTCHA Puzzle</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet" />
+
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <style>
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-image: url("./src/img/bg.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: -1;
+      }
+      .box {
+        height: 98px;
+        width: 130px;
+        margin: 1px;
+        border: black 1px solid;
+      }
+
+      img:not([src]) {
+        display: none;
+        /* Menghilangkan gambar yang tidak memiliki src */
+        /* Atau, Anda dapat memberikan gaya alternatif seperti placeholder */
+        /* contoh: */
+        background-color: lightgray;
+        color: white;
+        padding: 10px;
+        border: 1px solid gray;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <div
+      class="container card px-5 py-4 my-5 shadow-lg col-10 col-lg-4 animate__animated animate__bounceIn" style="background-color:#ffffffb4">
+      <h2 class="mt-4 mb-4 text-center">Daftar</h2>
+      <form id="registration-form">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            placeholder="Username"
+            required />
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required />
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Password"
+            required />
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+          <span class="">Selesaikan Captcha Puzzle Berikut!</span>
+        </div>
+        <div
+          id="captcha-container"
+          class="mb-5 d-flex flex-lg-row flex-column-reverse justify-content-center align-items-center">
+          <div class="d-flex flex-lg-column mt-5">
+            <div class="box mx-3" id="drag1">
+              <img
+                src="./src/img/1.png"
+                alt="Puzzle Piece 1"
+                style="height: 98px; width: 130px" />
+            </div>
+            <div class="box mx-3" id="drag2">
+              <img
+                src="./src/img/1.png"
+                alt="Puzzle Piece 1"
+                style="height: 98px; width: 130px" />
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="d-flex flex-column">
+              <div class="box" id="drop1">
+                <img
+                  src="./src/img/1.png"
+                  alt="Puzzle Piece 1"
+                  style="height: 98px; width: 130px" />
+              </div>
+              <div class="box" id="drop2">
+                <img
+                  src="./src/img/2.png"
+                  alt="Puzzle Piece 1"
+                  style="height: 98px; width: 130px" />
+              </div>
+              <div class="box" id="drop3">
+                <img
+                  src="./src/img/3.png"
+                  alt="Puzzle Piece 1"
+                  style="height: 98px; width: 130px" />
+              </div>
+            </div>
+            <div class="d-flex flex-column">
+              <div class="box" id="drop4">
+                <img
+                  src="./src/img/4.png"
+                  alt="Puzzle Piece 1"
+                  style="height: 98px; width: 130px" />
+              </div>
+              <div class="box" id="drop5">
+                <img
+                  src="./src/img/5.png"
+                  alt="Puzzle Piece 1"
+                  style="height: 98px; width: 130px" />
+              </div>
+              <div class="box" id="drop6">
+                <img
+                  src="./src/img/6.png"
+                  alt="Puzzle Piece 1"
+                  style="height: 98px; width: 130px" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Register</button>
+      </form>
+      <div class="d-flex justify-content-center mt-3">
+        <p>Sudah punya akun?</p>
+        <a href="login.html">Login!</a>
+      </div>
+      <div id="message" class="mt-3"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+      window.onload = function () {
+        particlesJS("particles-js", {
+          particles: {
+            number: {
+              value: 80,
+              density: {
+                enable: true,
+                value_area: 800,
+              },
+            },
+            color: {
+              value: "#ffffff",
+            },
+            shape: {
+              type: "circle",
+              stroke: {
+                width: 0,
+                color: "#000000",
+              },
+              polygon: {
+                nb_sides: 5,
+              },
+              image: {
+                src: "img/github.svg",
+                width: 100,
+                height: 100,
+              },
+            },
+            opacity: {
+              value: 0.5,
+              random: false,
+              anim: {
+                enable: false,
+                speed: 1,
+                opacity_min: 0.1,
+                sync: false,
+              },
+            },
+            size: {
+              value: 3,
+              random: true,
+              anim: {
+                enable: false,
+                speed: 40,
+                size_min: 0.1,
+                sync: false,
+              },
+            },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: "#ffffff",
+              opacity: 0.4,
+              width: 1,
+            },
+            move: {
+              enable: true,
+              speed: 6,
+              direction: "none",
+              random: false,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+              attract: {
+                enable: false,
+                rotateX: 600,
+                rotateY: 1200,
+              },
+            },
+          },
+          interactivity: {
+            detect_on: "canvas",
+            events: {
+              onhover: {
+                enable: true,
+                mode: "repulse",
+              },
+              onclick: {
+                enable: true,
+                mode: "push",
+              },
+              resize: true,
+            },
+            modes: {
+              grab: {
+                distance: 400,
+                line_linked: {
+                  opacity: 1,
+                },
+              },
+              bubble: {
+                distance: 400,
+                size: 40,
+                duration: 2,
+                opacity: 8,
+                speed: 3,
+              },
+              repulse: {
+                distance: 200,
+                duration: 0.4,
+              },
+              push: {
+                particles_nb: 4,
+              },
+              remove: {
+                particles_nb: 2,
+              },
+            },
+          },
+          retina_detect: true,
+        });
+      };
+    </script>
+    <script src="./src/js/regist.js"></script>
+  </body>
+</html>
