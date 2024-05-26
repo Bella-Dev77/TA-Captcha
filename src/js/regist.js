@@ -150,24 +150,25 @@ $(document).ready(function () {
   function isCorrectDrop(dropZone, droppedItem) {
     // Ambil ID kotak drop
     var dropId = dropZone.attr("id");
-  
+
     // Ambil src dari elemen yang di-drop
     var droppedSrc = droppedItem.find("img").attr("src");
-  
+
     // Loop melalui array removedPieces
     for (var i = 0; i < removedPieces.length; i++) {
       // Jika ID kotak drop dan src dari elemen yang di-drop cocok dengan data yang dihapus sebelumnya
-      if (dropId === removedPieces[i].id && droppedSrc === removedPieces[i].src) {
+      if (
+        dropId === removedPieces[i].id &&
+        droppedSrc === removedPieces[i].src
+      ) {
         // Lokasi drop adalah yang benar
         return true;
       }
     }
-  
+
     // Lokasi drop adalah yang salah
     return false;
   }
-  
-
 
   // Menangani submit formulir
   $("#registration-form").submit(function (event) {
@@ -205,7 +206,7 @@ $(document).ready(function () {
       timer: 2000, // Menutup otomatis setelah 2 detik
       onClose: function () {
         // Mengalihkan ke halaman login setelah pesan ditutup
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       },
     });
   });
