@@ -3,6 +3,7 @@ $(document).ready(function () {
   var startTime; // Waktu mulai menyelesaikan CAPTCHA
   var captchaCompleted = false; // Variabel untuk melacak apakah CAPTCHA telah diselesaikan
   var removedPieces = []; // Array untuk menyimpan info bagian yang dihilangkan
+  var touchStartX, touchStartY, draggingElement;
 
   // Fungsi untuk memuat ulang halaman
   function reloadPage() {
@@ -38,21 +39,6 @@ $(document).ready(function () {
         '" alt="Puzzle Piece" style="height: 98px; width: 130px">'
     );
   }
-
-  // Fungsi untuk menangani pergerakan kotak drag
-  $(".box").draggable({
-    revert: "invalid", // Mengembalikan kotak drag ke posisi awal jika tidak diletakkan di kotak drop yang valid
-    start: function (event, ui) {
-      // Memulai menghitung waktu saat pengguna mulai menyelesaikan CAPTCHA
-      startTime = new Date().getTime();
-    },
-    stop: function (event, ui) {
-      // Memeriksa apakah puzzle sudah selesai, jika ya, maka hentikan fungsi draggable pada semua elemen dengan class "box"
-      if (puzzleSolved) {
-        $(this).draggable("option", "disabled", true);
-      }
-    },
-  });
 
   // Fungsi untuk memeriksa apakah puzzle sudah selesai
   function checkPuzzle() {
@@ -91,11 +77,7 @@ $(document).ready(function () {
           icon: "error",
           title: "Terlalu cepat!",
           text: "Tolong selesaikan CAPTCHA dengan lebih lambat.",
-          showConfirmButton: false, // Menghilangkan tombol "OK"
-          onClose: function () {
-            reloadPage(); // Memuat ulang halaman setelah menutup pesan
-          },
-        });
+        }).then(reloadPage); // Muat ulang halaman setelah menutup pesan
       } else {
         // Menampilkan pesan sukses jika CAPTCHA selesai dengan benar
         Swal.fire({
@@ -109,8 +91,71 @@ $(document).ready(function () {
     }
   }
 
-  // Memanggil fungsi removeRandomPieces saat dokumen siap
-  removeRandomPieces();
+  // Fungsi untuk menangani pergerakan kotak drag
+  $(".box").draggable({
+    revert: "invalid", // Mengembalikan kotak drag ke posisi awal jika tidak diletakkan di kotak drop yang valid
+    start: function (event, ui) {
+      // Memulai menghitung waktu saat pengguna mulai menyelesaikan CAPTCHA
+      startTime = new Date().getTime();
+    },
+    stop: function (event, ui) {
+      // Memeriksa apakah puzzle sudah selesai, jika ya, maka hentikan fungsi draggable pada semua elemen dengan class "box"
+      if (puzzleSolved) {
+        $(this).draggable("option", "disabled", true);
+      }
+    },
+  });
+
+  // Fungsi untuk menangani event sentuh
+  $(".box").on("touchstart", function (event) {
+    var touch = event.originalEvent.touches[0];
+    touchStartX = touch.pageX;
+    touchStartY = touch.pageY;
+    draggingElement = $(this);
+    startTime = new Date().getTime();
+  });
+
+  $(".box").on("touchmove", function (event) {
+    var touch = event.originalEvent.touches[0];
+    var offsetX = touch.pageX - touchStartX;
+    var offsetY = touch.pageY - touchStartY;
+    draggingElement.css({
+      left: offsetX + "px",
+      top: offsetY + "px",
+      position: "absolute",
+    });
+  });
+
+  $(".box").on("touchend", function (event) {
+    var touch = event.originalEvent.changedTouches[0];
+    var dropZone = $(document.elementFromPoint(touch.pageX, touch.pageY));
+    if (dropZone.hasClass("box") && dropZone.children().length === 0) {
+      var puzzlePiece = draggingElement.find("img").attr("src");
+      dropZone.html(
+        '<img src="' +
+          puzzlePiece +
+          '" alt="Puzzle Piece" style="height: 98px; width: 130px">'
+      );
+      draggingElement.css({
+        left: 0,
+        top: 0,
+        position: "relative",
+      });
+      checkPuzzle();
+    } else {
+      draggingElement.css({
+        left: 0,
+        top: 0,
+        position: "relative",
+      });
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Drop Location",
+        text: "Please drop the item in an empty drop zone or in the correct drop zone.",
+      });
+    }
+    draggingElement = null;
+  });
 
   // Fungsi untuk menangani drop kotak drag ke kotak drop
   $(".box").droppable({
@@ -146,7 +191,7 @@ $(document).ready(function () {
     },
   });
 
-  /// Fungsi untuk memeriksa apakah elemen yang di-drop cocok dengan kotak drop yang sesuai
+  // Fungsi untuk memeriksa apakah elemen yang di-drop cocok dengan kotak drop yang sesuai
   function isCorrectDrop(dropZone, droppedItem) {
     // Ambil ID kotak drop
     var dropId = dropZone.attr("id");
@@ -210,4 +255,7 @@ $(document).ready(function () {
       },
     });
   });
+
+  // Memanggil fungsi removeRandomPieces saat dokumen siap
+  removeRandomPieces();
 });
