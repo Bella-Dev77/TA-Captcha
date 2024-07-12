@@ -29,14 +29,10 @@ $(document).ready(function () {
     }
     // Perbarui src dari drag1 dan drag2 sesuai dengan bagian yang dihilangkan
     $("#drag1").html(
-      '<img src="' +
-        removedPieces[0].src +
-        '" alt="Puzzle Piece" style="height: 98px; width: 130px">'
+      '<img src="' + removedPieces[0].src + '" alt="Puzzle Piece" style="height: 98px; width: 130px">'
     );
     $("#drag2").html(
-      '<img src="' +
-        removedPieces[1].src +
-        '" alt="Puzzle Piece" style="height: 98px; width: 130px">'
+      '<img src="' + removedPieces[1].src + '" alt="Puzzle Piece" style="height: 98px; width: 130px">'
     );
   }
 
@@ -112,17 +108,18 @@ $(document).ready(function () {
     touchStartX = touch.pageX;
     touchStartY = touch.pageY;
     draggingElement = $(this);
+    draggingElement.css('position', 'absolute');
     startTime = new Date().getTime();
   });
 
   $(".box").on("touchmove", function (event) {
+    event.preventDefault(); // Mencegah scrolling halaman saat drag
     var touch = event.originalEvent.touches[0];
     var offsetX = touch.pageX - touchStartX;
     var offsetY = touch.pageY - touchStartY;
     draggingElement.css({
-      left: offsetX + "px",
-      top: offsetY + "px",
-      position: "absolute",
+      left: touch.pageX - draggingElement.width() / 2 + 'px',
+      top: touch.pageY - draggingElement.height() / 2 + 'px'
     });
   });
 
@@ -195,13 +192,16 @@ $(document).ready(function () {
   function isCorrectDrop(dropZone, droppedItem) {
     // Ambil ID kotak drop
     var dropId = dropZone.attr("id");
+    console.log("Drop ID:", dropId);
 
     // Ambil src dari elemen yang di-drop
     var droppedSrc = droppedItem.find("img").attr("src");
+    console.log("Dropped Src:", droppedSrc);
 
     // Loop melalui array removedPieces
     for (var i = 0; i < removedPieces.length; i++) {
       // Jika ID kotak drop dan src dari elemen yang di-drop cocok dengan data yang dihapus sebelumnya
+      console.log("Comparing with:", removedPieces[i]);
       if (
         dropId === removedPieces[i].id &&
         droppedSrc === removedPieces[i].src
