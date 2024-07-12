@@ -215,47 +215,19 @@ $(document).ready(function () {
     return false;
   }
 
-  // Menangani submit formulir
-  $("#registration-form").submit(function (event) {
-    event.preventDefault(); // Mencegah pengiriman formulir
+  // Memulai proses CAPTCHA
+  removeRandomPieces();
 
+  // Menangani event submit form
+  $("#registration-form").on("submit", function (event) {
     if (!captchaCompleted) {
-      // Menampilkan pesan error jika CAPTCHA belum diselesaikan
+      // Jika CAPTCHA belum selesai, tampilkan pesan error
+      event.preventDefault();
       Swal.fire({
         icon: "error",
-        title: "Oops...",
-        text: "Please complete the CAPTCHA puzzle before submitting the form!",
+        title: "CAPTCHA not completed",
+        text: "Please solve the CAPTCHA puzzle before submitting the form.",
       });
-      return;
     }
-
-    // Mengambil nilai username, email, dan password dari formulir
-    var username = $("#username").val();
-    var email = $("#email").val();
-    var password = $("#password").val();
-
-    // Simpan data registrasi ke local storage (contoh)
-    var registrationData = {
-      username: username,
-      email: email,
-      password: password,
-    };
-    localStorage.setItem("registrationData", JSON.stringify(registrationData));
-
-    // Menampilkan pesan sukses
-    Swal.fire({
-      icon: "success",
-      title: "Registration Successful!",
-      text: "You will now be redirected to login page.",
-      showConfirmButton: false,
-      timer: 2000, // Menutup otomatis setelah 2 detik
-      onClose: function () {
-        // Mengalihkan ke halaman login setelah pesan ditutup
-        window.location.href = "index.html";
-      },
-    });
   });
-
-  // Memanggil fungsi removeRandomPieces saat dokumen siap
-  removeRandomPieces();
 });
