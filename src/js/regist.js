@@ -66,7 +66,7 @@ $(document).ready(function () {
       var elapsedTime = endTime - startTime;
 
       // Menampilkan pesan kesalahan jika waktu yang dibutuhkan terlalu singkat (misalnya, kurang dari 3 detik)
-      if (elapsedTime < 2000) {
+      if (elapsedTime < 1000) {
         // Menampilkan pesan kesalahan dan memuat ulang captcha setelah menutup pesan
         Swal.fire({
           icon: "error",
