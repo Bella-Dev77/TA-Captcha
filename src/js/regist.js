@@ -3,7 +3,6 @@ $(document).ready(function () {
   var startTime; // Waktu mulai menyelesaikan CAPTCHA
   var captchaCompleted = false; // Variabel untuk melacak apakah CAPTCHA telah diselesaikan
   var removedPieces = []; // Array untuk menyimpan info bagian yang dihilangkan
-  var touchStartX, touchStartY, draggingElement;
 
   // Fungsi untuk memuat ulang halaman
   function reloadPage() {
@@ -87,146 +86,77 @@ $(document).ready(function () {
     }
   }
 
-  // Fungsi untuk menangani pergerakan kotak drag
-  $(".box").draggable({
-    revert: "invalid", // Mengembalikan kotak drag ke posisi awal jika tidak diletakkan di kotak drop yang valid
-    start: function (event, ui) {
-      // Memulai menghitung waktu saat pengguna mulai menyelesaikan CAPTCHA
+  // Inisialisasi Interact.js untuk draggable
+  interact('.box').draggable({
+    inertia: true,
+    autoScroll: true,
+    onstart: function (event) {
       startTime = new Date().getTime();
     },
-    stop: function (event, ui) {
-      // Memeriksa apakah puzzle sudah selesai, jika ya, maka hentikan fungsi draggable pada semua elemen dengan class "box"
+    onmove: function (event) {
+      var target = event.target,
+        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+      target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+
+      target.setAttribute('data-x', x);
+      target.setAttribute('data-y', y);
+    },
+    onend: function (event) {
       if (puzzleSolved) {
-        $(this).draggable("option", "disabled", true);
+        event.target.draggable = false;
       }
-    },
-  });
-
-  // Fungsi untuk menangani event sentuh
-  $(".box").on("touchstart", function (event) {
-    var touch = event.originalEvent.touches[0];
-    touchStartX = touch.pageX;
-    touchStartY = touch.pageY;
-    draggingElement = $(this);
-    draggingElement.css('position', 'absolute');
-    startTime = new Date().getTime();
-  });
-
-  $(".box").on("touchmove", function (event) {
-    event.preventDefault(); // Mencegah scrolling halaman saat drag
-    var touch = event.originalEvent.touches[0];
-    var offsetX = touch.pageX - touchStartX;
-    var offsetY = touch.pageY - touchStartY;
-    draggingElement.css({
-      left: touch.pageX - draggingElement.width() / 2 + 'px',
-      top: touch.pageY - draggingElement.height() / 2 + 'px'
-    });
-  });
-
-  $(".box").on("touchend", function (event) {
-    var touch = event.originalEvent.changedTouches[0];
-    var dropZone = $(document.elementFromPoint(touch.pageX, touch.pageY));
-    if (dropZone.hasClass("box") && dropZone.children().length === 0) {
-      var puzzlePiece = draggingElement.find("img").attr("src");
-      dropZone.html(
-        '<img src="' +
-          puzzlePiece +
-          '" alt="Puzzle Piece" style="height: 98px; width: 130px">'
-      );
-      draggingElement.css({
-        left: 0,
-        top: 0,
-        position: "relative",
-      });
-      checkPuzzle();
-    } else {
-      draggingElement.css({
-        left: 0,
-        top: 0,
-        position: "relative",
-      });
-      Swal.fire({
-        icon: "error",
-        title: "Invalid Drop Location",
-        text: "Please drop the item in an empty drop zone or in the correct drop zone.",
-      });
     }
-    draggingElement = null;
   });
 
-  // Fungsi untuk menangani drop kotak drag ke kotak drop
-  $(".box").droppable({
-    accept: ".box", // Hanya menerima kotak drag
-    drop: function (event, ui) {
-      var dropZone = $(this);
-      var droppedItem = ui.draggable;
+  // Inisialisasi Interact.js untuk droppable
+  interact('.box').dropzone({
+    accept: '.box',
+    overlap: 0.75,
+    ondrop: function (event) {
+      var dropZone = $(event.target);
+      var droppedItem = $(event.relatedTarget);
 
-      // Memeriksa apakah elemen drag diletakkan di kotak drop yang valid
-      if (
-        dropZone.children().length > 0 ||
-        !isCorrectDrop(dropZone, droppedItem)
-      ) {
-        // Menampilkan pesan error jika lokasi drop tidak valid
+      if (dropZone.children().length > 0 || !isCorrectDrop(dropZone, droppedItem)) {
         Swal.fire({
-          icon: "error",
-          title: "Invalid Drop Location",
-          text: "Please drop the item in an empty drop zone or in the correct drop zone.",
+          icon: 'error',
+          title: 'Invalid Drop Location',
+          text: 'Please drop the item in an empty drop zone or in the correct drop zone.'
         });
-
-        // Mengembalikan elemen drag ke lokasi semula
-        droppedItem.draggable("option", "revert", true);
+        droppedItem.css('transform', 'translate(0, 0)');
+        droppedItem.attr('data-x', 0);
+        droppedItem.attr('data-y', 0);
       } else {
-        // Jika lokasi drop valid, lanjutkan dengan proses puzzle
-        var puzzlePiece = droppedItem.find("img").attr("src");
-        dropZone.html(
-          '<img src="' +
-            puzzlePiece +
-            '" alt="Puzzle Piece" style="height: 98px; width: 130px">'
-        );
-        checkPuzzle(); // Memeriksa puzzle setelah drop
+        var puzzlePiece = droppedItem.find('img').attr('src');
+        dropZone.html('<img src="' + puzzlePiece + '" alt="Puzzle Piece" style="height: 98px; width: 130px">');
+        checkPuzzle();
       }
-    },
+    }
   });
 
   // Fungsi untuk memeriksa apakah elemen yang di-drop cocok dengan kotak drop yang sesuai
   function isCorrectDrop(dropZone, droppedItem) {
-    // Ambil ID kotak drop
-    var dropId = dropZone.attr("id");
-    console.log("Drop ID:", dropId);
+    var dropId = dropZone.attr('id');
+    var droppedSrc = droppedItem.find('img').attr('src');
 
-    // Ambil src dari elemen yang di-drop
-    var droppedSrc = droppedItem.find("img").attr("src");
-    console.log("Dropped Src:", droppedSrc);
-
-    // Loop melalui array removedPieces
     for (var i = 0; i < removedPieces.length; i++) {
-      // Jika ID kotak drop dan src dari elemen yang di-drop cocok dengan data yang dihapus sebelumnya
-      console.log("Comparing with:", removedPieces[i]);
-      if (
-        dropId === removedPieces[i].id &&
-        droppedSrc === removedPieces[i].src
-      ) {
-        // Lokasi drop adalah yang benar
+      if (dropId === removedPieces[i].id && droppedSrc === removedPieces[i].src) {
         return true;
       }
     }
-
-    // Lokasi drop adalah yang salah
     return false;
   }
 
-  // Memulai proses CAPTCHA
   removeRandomPieces();
 
-  // Menangani event submit form
   $("#registration-form").on("submit", function (event) {
     if (!captchaCompleted) {
-      // Jika CAPTCHA belum selesai, tampilkan pesan error
       event.preventDefault();
       Swal.fire({
-        icon: "error",
-        title: "CAPTCHA not completed",
-        text: "Please solve the CAPTCHA puzzle before submitting the form.",
+        icon: 'error',
+        title: 'CAPTCHA not completed',
+        text: 'Please solve the CAPTCHA puzzle before submitting the form.'
       });
     }
   });
