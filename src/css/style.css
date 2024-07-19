@@ -1,0 +1,94 @@
+.palm {
+    width: 3rem;
+  }
+
+  #captchaBox {
+    color: black;
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .formCaptch {
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .box {
+    height: 98px;
+    width: 130px;
+    margin: 1px;
+    border: black 1px solid;
+  }
+
+  img:not([src]) {
+    display: none;
+    /* Menghilangkan gambar yang tidak memiliki src */
+    /* Atau, Anda dapat memberikan gaya alternatif seperti placeholder */
+    /* contoh: */
+    background-color: lightgray;
+    color: white;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+  }
+
+  .captcha {
+    display: none;
+}
+
+.login-box {
+  max-width: fit-content;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #ffffffb4;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Tambahkan properti ini */
+}
+
+.login-box h2 {
+  text-align: center;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.login-box input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login-box input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+}

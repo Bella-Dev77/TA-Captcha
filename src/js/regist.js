@@ -150,7 +150,7 @@ $(document).ready(function () {
 
   removeRandomPieces();
 
-  $("#registration-form").on("submit", function (event) {
+  $("#form").on("submit", function (event) {
     if (!captchaCompleted) {
       event.preventDefault();
       Swal.fire({

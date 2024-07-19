@@ -50,14 +50,14 @@ $(document).ready(function () {
   generateCaptcha();
 
   // Event listener for refresh button
-  $("#loginForm").on("click", '.captcha-action[value="Refresh"]', function () {
+  $("#form").on("click", '.captcha-action[value="Refresh"]', function () {
     generateCaptcha();
     $("#num1").val("");
     $("#num2").val("");
   });
 
   // Event listener for answer buttons
-  $("#loginForm").on("click", ".captcha-answer", function () {
+  $("#form").on("click", ".captcha-answer", function () {
     var answer = parseInt($(this).find("span").text());
     if ($("#num1").val() === "") {
       $("#num1").val(answer);
@@ -67,7 +67,7 @@ $(document).ready(function () {
   });
 
   // Form submission validation
-  $("#loginForm").submit(function (event) {
+  $("#form").submit(function (event) {
     event.preventDefault();
     var inputSum = parseInt($("#num1").val()) + parseInt($("#num2").val());
     var captchaSum = parseInt($("#captcha-text").attr("data-sum"));

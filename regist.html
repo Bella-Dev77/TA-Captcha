@@ -12,6 +12,7 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+      <link rel="stylesheet" href="./src/css/style.css">
 
     <style>
       #particles-js {
@@ -50,7 +51,7 @@
       class="container card px-5 py-4 my-5 shadow-lg col-10 col-lg-4 animate__animated animate__bounceIn"
       style="background-color: #ffffffb4">
       <h2 class="mt-4 mb-4 text-center">Daftar</h2>
-      <form id="registration-form">
+      <form id="form">
         <div class="form-group">
           <input
             type="text"
@@ -78,69 +79,180 @@
             placeholder="Password"
             required />
         </div>
-        <div class="d-flex justify-content-center mb-3">
-          <span class="">Selesaikan Captcha Puzzle Berikut!</span>
-        </div>
-        <div
-          id="captcha-container"
-          class="mb-5 d-flex flex-lg-row flex-column-reverse justify-content-center align-items-center">
-          <div class="d-flex flex-lg-column mt-5">
-            <div class="box mx-3" id="drag1">
-              <img
-                src="./src/img/1.png"
-                alt="Puzzle Piece 1"
-                style="height: 98px; width: 130px" />
+             <!-- Captcha here  -->
+             <button id="refreshCaptcha" type="button" class="rounded-circle border-0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+              <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+            </svg></button>
+            <!-- captcha 1  -->
+            <div id="captcha1" class="captcha">
+              <!-- Captcha Angka -->
+              <div
+                class="d-flex flex-column align-items-center justify-content-around">
+                <div>
+                  <span>Selesaikan Captcha Berikut:</span>
+                </div>
+                <div
+                  class="form-group d-flex align-items-center justify-content-center">
+                  <input
+                    type="number"
+                    id="num1"
+                    name="num1"
+                    class="form-control w-25"
+                    readonly
+                    required />
+                  <span class="mx-2">+</span>
+                  <input
+                    type="number"
+                    id="num2"
+                    name="num2"
+                    class="form-control w-25"
+                    readonly
+                    required />
+                  <span class="mx-2">=</span>
+                  <div id="captcha-text"></div>
+                </div>
+                <div>
+                  <button
+                    class="btn-light rounded-pill captcha-answer"
+                    type="button">
+                    <img src="./src/img/palm.png" alt="Gambar 1" class="palm" />
+                    <span id="text1"></span>
+                  </button>
+                  <button
+                    class="btn-light rounded-pill captcha-answer"
+                    type="button">
+                    <img src="./src/img/palm.png" alt="Gambar 2" class="palm" />
+                    <span id="text2"></span>
+                  </button>
+                  <button
+                    class="btn-light rounded-pill captcha-answer"
+                    type="button">
+                    <img src="./src/img/palm.png" alt="Gambar 3" class="palm" />
+                    <span id="text3"></span>
+                  </button>
+                  <button
+                    class="btn-light rounded-pill captcha-answer"
+                    type="button">
+                    <img src="./src/img/palm.png" alt="Gambar 4" class="palm" />
+                    <span id="text4"></span>
+                  </button>
+                </div>
+    
+                <div class="my-3">
+                  <button
+                    class="btn-primary captcha-action rounded rounded-4"
+                    value="Refresh"
+                    type="button">
+                    Refresh
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="box mx-3" id="drag2">
-              <img
-                src="./src/img/1.png"
-                alt="Puzzle Piece 1"
-                style="height: 98px; width: 130px" />
+            <!-- Captcha 2 -->
+            <div id="captcha2" class="captcha">
+              <div class="d-flex justify-content-center mb-3">
+                <span class="">Selesaikan Captcha Puzzle Berikut!</span>
+              </div>
+              <div
+                id="captcha-container"
+                class="mb-5 d-flex flex-lg-row flex-column-reverse justify-content-center align-items-center">
+                <div class="d-flex flex-lg-column mt-5">
+                  <div class="box mx-3" id="drag1">
+                    <img
+                      src="./src/img/1.png"
+                      alt="Puzzle Piece 1"
+                      style="height: 98px; width: 130px" />
+                  </div>
+                  <div class="box mx-3" id="drag2">
+                    <img
+                      src="./src/img/1.png"
+                      alt="Puzzle Piece 1"
+                      style="height: 98px; width: 130px" />
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="d-flex flex-column">
+                    <div class="box" id="drop1">
+                      <img
+                        src="./src/img/1.png"
+                        alt="Puzzle Piece 1"
+                        style="height: 98px; width: 130px" />
+                    </div>
+                    <div class="box" id="drop2">
+                      <img
+                        src="./src/img/2.png"
+                        alt="Puzzle Piece 1"
+                        style="height: 98px; width: 130px" />
+                    </div>
+                    <div class="box" id="drop3">
+                      <img
+                        src="./src/img/3.png"
+                        alt="Puzzle Piece 1"
+                        style="height: 98px; width: 130px" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column">
+                    <div class="box" id="drop4">
+                      <img
+                        src="./src/img/4.png"
+                        alt="Puzzle Piece 1"
+                        style="height: 98px; width: 130px" />
+                    </div>
+                    <div class="box" id="drop5">
+                      <img
+                        src="./src/img/5.png"
+                        alt="Puzzle Piece 1"
+                        style="height: 98px; width: 130px" />
+                    </div>
+                    <div class="box" id="drop6">
+                      <img
+                        src="./src/img/6.png"
+                        alt="Puzzle Piece 1"
+                        style="height: 98px; width: 130px" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="d-flex">
-            <div class="d-flex flex-column">
-              <div class="box" id="drop1">
-                <img
-                  src="./src/img/1.png"
-                  alt="Puzzle Piece 1"
-                  style="height: 98px; width: 130px" />
+            <!-- Captcha3 -->
+            <div id="captcha3" class="captcha">
+              <!-- Contoh konten Captcha 3 -->
+            <div class="form-group d-flex flex-column align-items-center">
+                <label
+                  for="captchaColor"
+                  class="text-dark fw-bold"
+                  style="color: #4a4a4a"
+                  >CAPTCHA:</label
+                >
+                <div
+                  id="captchaBox"
+                  class="border border-dark rounded d-flex justify-content-center align-items-center"
+                  style="background-color: #dcdcdc; color: #4a4a4a">
+                  <span id="captchaText" class="d-none"></span>
+                </div>
               </div>
-              <div class="box" id="drop2">
-                <img
-                  src="./src/img/2.png"
-                  alt="Puzzle Piece 1"
-                  style="height: 98px; width: 130px" />
+              <button
+                type="button"
+                id="refreshCaptcha1"
+                class="btn btn-secondary">
+                Refresh
+              </button>
+              <div style="display: none">
+                <span id="captchaColor"></span>
+                <span id="captchaLetter"></span>
               </div>
-              <div class="box" id="drop3">
-                <img
-                  src="./src/img/3.png"
-                  alt="Puzzle Piece 1"
-                  style="height: 98px; width: 130px" />
-              </div>
-            </div>
-            <div class="d-flex flex-column">
-              <div class="box" id="drop4">
-                <img
-                  src="./src/img/4.png"
-                  alt="Puzzle Piece 1"
-                  style="height: 98px; width: 130px" />
-              </div>
-              <div class="box" id="drop5">
-                <img
-                  src="./src/img/5.png"
-                  alt="Puzzle Piece 1"
-                  style="height: 98px; width: 130px" />
-              </div>
-              <div class="box" id="drop6">
-                <img
-                  src="./src/img/6.png"
-                  alt="Puzzle Piece 1"
-                  style="height: 98px; width: 130px" />
+              <div class="form-group">
+                <label
+                  for="captchaAnswer"
+                  class="text-dark"
+                  style="color: #4a4a4a"
+                  >Answer:</label
+                >
+                <div id="captchaButtons" class="d-flex justify-content-center align-items-center"></div>
               </div>
             </div>
-          </div>
-        </div>
+    <!-- end  -->
         <button type="submit" class="btn btn-primary w-100">Register</button>
       </form>
       <div class="d-flex justify-content-center mt-3">
@@ -155,7 +267,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
     <!-- Tambahkan ini di dalam <head> atau sebelum </body> -->
-    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.11/dist/interact.min.js"></script>
 
     <script>
       window.onload = function () {
@@ -271,6 +382,11 @@
         });
       };
     </script>
-    <script src="./src/js/regist.js"></script>
+     <!-- untuk captcha puzzle  -->
+     <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.11/dist/interact.min.js"></script>
+     <script src="./src/js/captchaSawit.js"></script>
+     <script src="./src/js/login.js"></script>
+     <script src="./src/js/home.js"></script>
+     <script src="./src/js/regist.js"></script>
   </body>
 </html>

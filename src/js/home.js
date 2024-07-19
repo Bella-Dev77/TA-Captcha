@@ -59,7 +59,7 @@ $(document).ready(function () {
     
   
     // On form submission
-    $("#captchaForm").submit(function (event) {
+    $("#form").submit(function (event) {
       event.preventDefault();
   
       if (!captchaValidated) { // Periksa apakah CAPTCHA sudah divalidasi
@@ -82,7 +82,7 @@ $(document).ready(function () {
     });
   
     // Event handler for the refresh button
-  $("#refreshCaptcha").click(function () {
+  $("#refreshCaptcha1").click(function () {
     displayCaptcha(); // Perbarui CAPTCHA
     generateAnswerButtons(); // Perbarui tombol jawaban
   });
