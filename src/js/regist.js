@@ -150,14 +150,14 @@ $(document).ready(function () {
 
   removeRandomPieces();
 
-  $("#form").on("submit", function (event) {
-    if (!captchaCompleted) {
-      event.preventDefault();
-      Swal.fire({
-        icon: 'error',
-        title: 'CAPTCHA not completed',
-        text: 'Please solve the CAPTCHA puzzle before submitting the form.'
-      });
-    }
-  });
+  // $("#form").on("submit", function (event) {
+  //   if (!captchaCompleted) {
+  //     event.preventDefault();
+  //     Swal.fire({
+  //       icon: 'error',
+  //       title: 'CAPTCHA not completed',
+  //       text: 'Please solve the CAPTCHA puzzle before submitting the form.'
+  //     });
+  //   }
+  // });
 });

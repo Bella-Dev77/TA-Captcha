@@ -62,14 +62,14 @@ $(document).ready(function () {
     $("#form").submit(function (event) {
       event.preventDefault();
   
-      if (!captchaValidated) { // Periksa apakah CAPTCHA sudah divalidasi
-        Swal.fire({
-          icon: "error",
-          title: "CAPTCHA validation failed",
-          text: "Please solve the CAPTCHA before submitting the form.",
-        });
-        return;
-      }
+      // if (!captchaValidated) { // Periksa apakah CAPTCHA sudah divalidasi
+      //   Swal.fire({
+      //     icon: "error",
+      //     title: "CAPTCHA validation failed",
+      //     text: "Please solve the CAPTCHA before submitting the form.",
+      //   });
+      //   return;
+      // }
   
       // Jika CAPTCHA sudah divalidasi, lanjutkan dengan pengiriman formulir
       // Anda dapat menambahkan kode AJAX di sini untuk mengirim data formulir
@@ -78,6 +78,13 @@ $(document).ready(function () {
         title: "Form submitted successfully!",
         showConfirmButton: false,
         timer: 1500,
+      }).then(function () {
+        var currentPage = window.location.pathname;
+        if (currentPage === "/index.html" || currentPage === "/") {
+          window.location.href = "home.html";
+        } else {
+          window.location.href = "#";
+        }
       });
     });
   

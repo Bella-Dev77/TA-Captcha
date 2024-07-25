@@ -1,3 +1,10 @@
+.sawit {
+  background-image: url('../img/sawit.png');
+  background-size: 100% 100%; /* or use a specific width and height, e.g. 50px 50px */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .palm {
     width: 3rem;
   }

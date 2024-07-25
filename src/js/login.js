@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var captchaCompleted = false; // Variabel untuk melacak apakah CAPTCHA telah diselesaikan
   // Function to generate random numbers for captcha
   function generateCaptcha() {
     var num1 = Math.floor(Math.random() * 10);
@@ -33,7 +34,11 @@ $(document).ready(function () {
         );
       } else {
         var wrongAnswer = Math.floor(Math.random() * 20);
-        while (wrongAnswer === answer1 || wrongAnswer === answer2 || wrongAnswer === sum) {
+        while (
+          wrongAnswer === answer1 ||
+          wrongAnswer === answer2 ||
+          wrongAnswer === sum
+        ) {
           wrongAnswer = Math.floor(Math.random() * 20);
         }
         $(this).html(
@@ -59,6 +64,19 @@ $(document).ready(function () {
   // Event listener for answer buttons
   $("#form").on("click", ".captcha-answer", function () {
     var answer = parseInt($(this).find("span").text());
+    var captchaSum = parseInt($("#captcha-text").attr("data-sum")); // Get the correct sum from the captcha text
+
+    // Validate the answer
+    if (answer === captchaSum) {
+      // Correct answer!
+      $(this).addClass("btn-success"); // Add a success class to the button
+      $(this).siblings(".captcha-answer").removeClass("btn-success"); // Remove success class from other buttons
+    } else {
+      // Incorrect answer!
+      $(this).addClass("btn-danger"); // Add a danger class to the button
+    }
+
+    // Populate the input fields
     if ($("#num1").val() === "") {
       $("#num1").val(answer);
     } else if ($("#num2").val() === "") {
@@ -90,7 +108,12 @@ $(document).ready(function () {
         text: "Anda telah berhasil login.",
       });
       setTimeout(function () {
-        window.location.href = "home.html";
+        var currentPage = window.location.pathname;
+        if (currentPage === "/index.html" || currentPage === "/") {
+          window.location.href = "home.html";
+        } else {
+          window.location.href = "#";
+        }
       }, 2000);
     }
   });
