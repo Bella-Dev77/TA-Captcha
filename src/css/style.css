@@ -49,9 +49,10 @@
     border-radius: 5px;
   }
 
-  .captcha {
+  #captcha1, #captcha2, #captcha3 {
     display: none;
 }
+
 
 .login-box {
   max-width: fit-content;

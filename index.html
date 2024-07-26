@@ -25,7 +25,6 @@
         margin: 0;
         padding: 0;
         height: 100%;
-      
       }
 
       #particles-js {
@@ -50,7 +49,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        flex-wrap: wrap; /* Tambahkan properti ini */
       }
 
       .login-box h2 {
@@ -85,6 +83,10 @@
       .error-message {
         color: red;
       }
+
+      .captcha {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -105,12 +107,8 @@
           id="password"
           placeholder="Password"
           required />
-        <!-- Captcha here  -->
-        <button id="refreshCaptcha" type="button" class="rounded-circle border-0"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
-          <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
-        </svg></button>
-        <!-- captcha 1  -->
+        <!-- Captcha here -->
+        <!-- captcha 1 -->
         <div id="captcha1" class="captcha">
           <!-- Captcha Angka -->
           <div
@@ -167,6 +165,7 @@
 
             <div class="my-3">
               <button
+                id="refreshCaptcha"
                 class="btn-primary captcha-action rounded rounded-4"
                 value="Refresh"
                 type="button">
@@ -240,15 +239,22 @@
               </div>
             </div>
           </div>
+          <div
+          class="d-flex justify-content-center mb-3">
+            <button
+              id="refreshCaptcha"
+              class="btn-primary captcha-action rounded rounded-4"
+              value="Refresh"
+              type="button">
+              Refresh
+            </button>
+          </div>
         </div>
         <!-- Captcha3 -->
         <div id="captcha3" class="captcha sawit">
           <!-- Contoh konten Captcha 3 -->
-        <div class="form-group d-flex flex-column align-items-center">
-            <label
-              for="captchaColor"
-              class="text-dark"
-              style="color: #4a4a4a"
+          <div class="form-group d-flex flex-column align-items-center">
+            <label for="captchaColor" class="text-dark" style="color: #4a4a4a"
               >CAPTCHA:</label
             >
             <div
@@ -258,27 +264,31 @@
               <span id="captchaText" class="d-none"></span>
             </div>
           </div>
-          <button
-            type="button"
-            id="refreshCaptcha1"
-            class="btn btn-secondary">
-            Refresh
-          </button>
+          <div
+          class="d-flex justify-content-center">
+            <button
+              id="refreshCaptcha"
+              class="btn-primary captcha-action rounded rounded-4"
+              value="Refresh"
+              type="button">
+              Refresh
+            </button>
+          </div>
+
           <div style="display: none">
             <span id="captchaColor"></span>
             <span id="captchaLetter"></span>
           </div>
           <div class="form-group">
-            <label
-              for="captchaAnswer"
-              class="text-dark"
-              style="color: #4a4a4a"
+            <label for="captchaAnswer" class="text-light" style="color: #4a4a4a"
               >Answer:</label
             >
-            <div id="captchaButtons" class="d-flex justify-content-center align-items-center"></div>
+            <div
+              id="captchaButtons"
+              class="d-flex justify-content-center align-items-center"></div>
           </div>
         </div>
-<!-- end  -->
+        <!-- end -->
         <input type="submit" value="Login" />
       </form>
       <div class="d-flex my-3">
